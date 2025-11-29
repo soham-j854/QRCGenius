@@ -365,25 +365,237 @@ END:VCARD`;
                 <CardTitle className="text-2xl">Create Your QR Code</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="content">
-                    Content
-                    <span className="text-muted-foreground ml-2 text-sm font-normal">
-                      ({content.length}/{MAX_CONTENT_LENGTH})
-                    </span>
-                  </Label>
-                  <Textarea
-                    id="content"
-                    placeholder="Enter URL, text, vCard, WiFi credentials...&#10;&#10;Examples:&#10;https://example.com&#10;WIFI:T:WPA;S:MyNetwork;P:password;;"
-                    value={content}
-                    onChange={(e) => handleContentChange(e.target.value)}
-                    className="min-h-[120px] resize-none text-base"
-                    aria-describedby="content-error"
-                    data-testid="input-content"
-                  />
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="qr-type" className="mb-3 block">
+                      QR Code Type
+                    </Label>
+                    <Select value={qrType} onValueChange={(value) => handleQRTypeChange(value as QRType)}>
+                      <SelectTrigger id="qr-type" data-testid="select-qr-type">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="text">Plain Text</SelectItem>
+                        <SelectItem value="website">Website URL</SelectItem>
+                        <SelectItem value="contact">Contact Card (vCard)</SelectItem>
+                        <SelectItem value="wifi">WiFi Network</SelectItem>
+                        <SelectItem value="email">Email</SelectItem>
+                        <SelectItem value="phone">Phone Number</SelectItem>
+                        <SelectItem value="sms">SMS Message</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-3">
+                    {qrType === "text" && (
+                      <div className="space-y-2">
+                        <Label htmlFor="text-input">Text Content</Label>
+                        <Textarea
+                          id="text-input"
+                          placeholder="Enter your text..."
+                          value={formData.text_content || ""}
+                          onChange={(e) => updateFormData("text_content", e.target.value)}
+                          className="min-h-[100px] resize-none text-base"
+                          data-testid="input-text"
+                        />
+                      </div>
+                    )}
+
+                    {qrType === "website" && (
+                      <div className="space-y-2">
+                        <Label htmlFor="website-url">Website URL</Label>
+                        <Input
+                          id="website-url"
+                          type="url"
+                          placeholder="https://example.com"
+                          value={formData.website_url || ""}
+                          onChange={(e) => updateFormData("website_url", e.target.value)}
+                          data-testid="input-website-url"
+                        />
+                      </div>
+                    )}
+
+                    {qrType === "contact" && (
+                      <div className="space-y-3">
+                        <div className="space-y-2">
+                          <Label htmlFor="contact-name">Name *</Label>
+                          <Input
+                            id="contact-name"
+                            placeholder="John Doe"
+                            value={formData.contact_name || ""}
+                            onChange={(e) => updateFormData("contact_name", e.target.value)}
+                            data-testid="input-contact-name"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="contact-phone">Phone</Label>
+                          <Input
+                            id="contact-phone"
+                            placeholder="+1 (555) 000-0000"
+                            value={formData.contact_phone || ""}
+                            onChange={(e) => updateFormData("contact_phone", e.target.value)}
+                            data-testid="input-contact-phone"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="contact-email">Email</Label>
+                          <Input
+                            id="contact-email"
+                            type="email"
+                            placeholder="john@example.com"
+                            value={formData.contact_email || ""}
+                            onChange={(e) => updateFormData("contact_email", e.target.value)}
+                            data-testid="input-contact-email"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="contact-company">Company</Label>
+                          <Input
+                            id="contact-company"
+                            placeholder="Your Company"
+                            value={formData.contact_company || ""}
+                            onChange={(e) => updateFormData("contact_company", e.target.value)}
+                            data-testid="input-contact-company"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="contact-website">Website</Label>
+                          <Input
+                            id="contact-website"
+                            type="url"
+                            placeholder="https://example.com"
+                            value={formData.contact_website || ""}
+                            onChange={(e) => updateFormData("contact_website", e.target.value)}
+                            data-testid="input-contact-website"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {qrType === "wifi" && (
+                      <div className="space-y-3">
+                        <div className="space-y-2">
+                          <Label htmlFor="wifi-ssid">Network Name (SSID) *</Label>
+                          <Input
+                            id="wifi-ssid"
+                            placeholder="MyNetworkName"
+                            value={formData.wifi_ssid || ""}
+                            onChange={(e) => updateFormData("wifi_ssid", e.target.value)}
+                            data-testid="input-wifi-ssid"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="wifi-security">Security Type</Label>
+                          <Select value={formData.wifi_security || "WPA"} onValueChange={(value) => updateFormData("wifi_security", value)}>
+                            <SelectTrigger id="wifi-security" data-testid="select-wifi-security">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="WPA">WPA/WPA2</SelectItem>
+                              <SelectItem value="WEP">WEP</SelectItem>
+                              <SelectItem value="nopass">No Password</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="wifi-password">Password</Label>
+                          <Input
+                            id="wifi-password"
+                            type="password"
+                            placeholder="Leave empty if no password"
+                            value={formData.wifi_password || ""}
+                            onChange={(e) => updateFormData("wifi_password", e.target.value)}
+                            data-testid="input-wifi-password"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {qrType === "email" && (
+                      <div className="space-y-3">
+                        <div className="space-y-2">
+                          <Label htmlFor="email-address">Email Address *</Label>
+                          <Input
+                            id="email-address"
+                            type="email"
+                            placeholder="recipient@example.com"
+                            value={formData.email_address || ""}
+                            onChange={(e) => updateFormData("email_address", e.target.value)}
+                            data-testid="input-email-address"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="email-subject">Subject</Label>
+                          <Input
+                            id="email-subject"
+                            placeholder="Email subject"
+                            value={formData.email_subject || ""}
+                            onChange={(e) => updateFormData("email_subject", e.target.value)}
+                            data-testid="input-email-subject"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="email-body">Message</Label>
+                          <Textarea
+                            id="email-body"
+                            placeholder="Email body"
+                            value={formData.email_body || ""}
+                            onChange={(e) => updateFormData("email_body", e.target.value)}
+                            className="min-h-[80px] resize-none text-base"
+                            data-testid="input-email-body"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {qrType === "phone" && (
+                      <div className="space-y-2">
+                        <Label htmlFor="phone-number">Phone Number *</Label>
+                        <Input
+                          id="phone-number"
+                          placeholder="+1 (555) 000-0000"
+                          value={formData.phone_number || ""}
+                          onChange={(e) => updateFormData("phone_number", e.target.value)}
+                          data-testid="input-phone-number"
+                        />
+                      </div>
+                    )}
+
+                    {qrType === "sms" && (
+                      <div className="space-y-3">
+                        <div className="space-y-2">
+                          <Label htmlFor="sms-number">Phone Number *</Label>
+                          <Input
+                            id="sms-number"
+                            placeholder="+1 (555) 000-0000"
+                            value={formData.sms_number || ""}
+                            onChange={(e) => updateFormData("sms_number", e.target.value)}
+                            data-testid="input-sms-number"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="sms-message">Message</Label>
+                          <Textarea
+                            id="sms-message"
+                            placeholder="Your SMS message"
+                            value={formData.sms_message || ""}
+                            onChange={(e) => updateFormData("sms_message", e.target.value)}
+                            className="min-h-[80px] resize-none text-base"
+                            data-testid="input-sms-message"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="p-3 bg-muted/50 rounded-md border border-muted">
+                    <p className="text-xs text-muted-foreground">
+                      <span className="font-semibold text-foreground">Content Preview:</span> {content.length > 0 ? content.substring(0, 80) + (content.length > 80 ? "..." : "") : "No content yet"}
+                    </p>
+                  </div>
+
                   {validationError && (
                     <p
-                      id="content-error"
                       className="text-sm text-destructive"
                       role="alert"
                       data-testid="text-validation-error"
