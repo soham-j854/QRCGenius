@@ -1,51 +1,11 @@
-import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Mail, MessageSquare, HelpCircle, Send, CheckCircle } from "lucide-react";
+import { ArrowLeft, Mail, Phone } from "lucide-react";
 
 export default function Contact() {
-  const { toast } = useToast();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: ""
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.name || !formData.email || !formData.message) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    setIsSubmitted(true);
-    toast({
-      title: "Message Received",
-      description: "Thank you for contacting us. We'll get back to you soon!"
-    });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -61,164 +21,82 @@ export default function Contact() {
 
           <header className="mb-12">
             <h1 className="text-4xl font-bold text-foreground mb-4" data-testid="text-contact-title">
-              Contact Us
+              Get in Touch
             </h1>
             <p className="text-xl text-muted-foreground">
-              Have questions, feedback, or suggestions? We'd love to hear from you.
+              Have questions about QRGenius? We're here to help.
             </p>
           </header>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <MessageSquare className="w-5 h-5 text-primary" />
-                    Send Us a Message
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {isSubmitted ? (
-                    <div className="text-center py-8">
-                      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                        <CheckCircle className="w-8 h-8 text-primary" />
-                      </div>
-                      <h3 className="text-xl font-semibold text-foreground mb-2">
-                        Thank You!
-                      </h3>
-                      <p className="text-muted-foreground mb-6">
-                        Your message has been received. We typically respond within 24-48 hours.
-                      </p>
-                      <Button onClick={() => setIsSubmitted(false)} variant="outline">
-                        Send Another Message
-                      </Button>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid sm:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="name">Name *</Label>
-                          <Input
-                            id="name"
-                            name="name"
-                            placeholder="Your name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            data-testid="input-contact-name"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="email">Email *</Label>
-                          <Input
-                            id="email"
-                            name="email"
-                            type="email"
-                            placeholder="your@email.com"
-                            value={formData.email}
-                            onChange={handleChange}
-                            data-testid="input-contact-email"
-                          />
-                        </div>
-                      </div>
+          <div className="max-w-3xl">
+            <Card className="mb-8">
+              <CardContent className="p-8">
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  We'd love to hear from you! Whether you have questions about using QRGenius, 
+                  feedback about features, or need support, please don't hesitate to reach out. 
+                  As a free QR code generator, we're committed to providing the best experience 
+                  for our users. Your inquiries, suggestions, and feedback help us continuously 
+                  improve. Contact us directly using the information below, and we'll get back 
+                  to you as soon as possible.
+                </p>
+              </CardContent>
+            </Card>
 
-                      <div className="space-y-2">
-                        <Label htmlFor="subject">Subject</Label>
-                        <Input
-                          id="subject"
-                          name="subject"
-                          placeholder="What is this about?"
-                          value={formData.subject}
-                          onChange={handleChange}
-                          data-testid="input-contact-subject"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="message">Message *</Label>
-                        <Textarea
-                          id="message"
-                          name="message"
-                          placeholder="How can we help you?"
-                          rows={5}
-                          value={formData.message}
-                          onChange={handleChange}
-                          data-testid="input-contact-message"
-                        />
-                      </div>
-
-                      <Button type="submit" className="w-full gap-2" data-testid="button-contact-submit">
-                        <Send className="w-4 h-4" />
-                        Send Message
-                      </Button>
-                    </form>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="space-y-6">
-              <Card>
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card className="hover-elevate">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-5 h-5 text-primary" />
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-1">Email Us</h3>
-                      <p className="text-sm text-muted-foreground">
-                        For general inquiries and support
-                      </p>
+                      <h3 className="font-semibold text-foreground mb-2">Email</h3>
                       <a 
-                        href="mailto:support@qrgenius.app" 
-                        className="text-sm text-primary hover:underline"
+                        href="mailto:sohamj@zohomail.in" 
+                        className="text-lg text-primary hover:underline font-medium"
                         data-testid="link-email"
                       >
-                        support@qrgenius.app
+                        sohamj@zohomail.in
                       </a>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="hover-elevate">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <HelpCircle className="w-5 h-5 text-primary" />
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-1">FAQ</h3>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        Check our frequently asked questions for quick answers.
-                      </p>
-                      <Link href="/#faq" className="text-sm text-primary hover:underline" data-testid="link-faq">
-                        View FAQ
-                      </Link>
+                      <h3 className="font-semibold text-foreground mb-2">Phone</h3>
+                      <a 
+                        href="tel:+919829927067" 
+                        className="text-lg text-primary hover:underline font-medium"
+                        data-testid="link-phone"
+                      >
+                        +91 9829927067
+                      </a>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-
-              <Card className="bg-muted/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-foreground mb-3">Response Time</h3>
-                  <p className="text-sm text-muted-foreground">
-                    We aim to respond to all inquiries within 24-48 hours during business days. 
-                    For urgent matters, please include "URGENT" in your subject line.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-muted/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-foreground mb-3">Feedback Welcome</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Have a suggestion for a new feature or improvement? We love hearing from our 
-                    users and are always looking for ways to make QRGenius better.
-                  </p>
-                </CardContent>
-              </Card>
             </div>
+
+            <Card className="mt-8 bg-primary/5 border-primary/20">
+              <CardContent className="p-8">
+                <h3 className="text-lg font-semibold text-foreground mb-3">
+                  Why We're Here
+                </h3>
+                <p className="text-muted-foreground">
+                  QRGenius was created to provide everyone with access to a free, reliable, 
+                  and easy-to-use QR code generator. We believe quality tools should be 
+                  accessible to all without barriers. If you have any questions, suggestions 
+                  for improvements, or just want to say hello, we'd be happy to hear from you!
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </main>
