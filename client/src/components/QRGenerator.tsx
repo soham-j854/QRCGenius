@@ -341,6 +341,30 @@ export default function QRGenerator() {
                             step={10}
                             data-testid="slider-size"
                           />
+                          <div className="mt-4">
+                            <Label htmlFor="customSize" className="text-sm">
+                              Custom Resolution (px)
+                            </Label>
+                            <Input
+                              id="customSize"
+                              type="number"
+                              min="100"
+                              max="1000"
+                              value={settings.size}
+                              onChange={(e) => {
+                                const value = parseInt(e.target.value);
+                                if (!isNaN(value) && value >= 100 && value <= 1000) {
+                                  setSettings((prev) => ({ ...prev, size: value }));
+                                }
+                              }}
+                              placeholder="Enter resolution (100-1000)"
+                              className="mt-1 font-mono text-sm"
+                              data-testid="input-custom-size"
+                            />
+                            <p className="text-xs text-muted-foreground mt-1">
+                              Enter a value between 100 and 1000 pixels
+                            </p>
+                          </div>
                         </div>
 
                         <div className="space-y-3">
