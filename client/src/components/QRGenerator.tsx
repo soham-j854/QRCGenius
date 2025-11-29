@@ -62,10 +62,10 @@ export default function QRGenerator() {
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [settings, setSettings] = useState<QRSettings>({
-    size: 300,
+    size: 500,
     fgColor: "#000000",
     bgColor: "#ffffff",
-    errorCorrection: "M",
+    errorCorrection: "H",
   });
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
@@ -337,7 +337,7 @@ export default function QRGenerator() {
                               setSettings((prev) => ({ ...prev, size: value[0] }))
                             }
                             min={100}
-                            max={500}
+                            max={1000}
                             step={10}
                             data-testid="slider-size"
                           />
@@ -447,9 +447,12 @@ export default function QRGenerator() {
                               <SelectItem value="L">Low (7% recovery)</SelectItem>
                               <SelectItem value="M">Medium (15% recovery)</SelectItem>
                               <SelectItem value="Q">Quartile (25% recovery)</SelectItem>
-                              <SelectItem value="H">High (30% recovery)</SelectItem>
+                              <SelectItem value="H">High (30% recovery) - Recommended for printing</SelectItem>
                             </SelectContent>
                           </Select>
+                          <p className="text-xs text-muted-foreground">
+                            🎯 High error correction is enabled by default. Your QR codes will remain scannable even if 30% is damaged, making them perfect for printed materials.
+                          </p>
                         </div>
 
                         <div className="space-y-2">
