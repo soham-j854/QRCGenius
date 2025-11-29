@@ -273,8 +273,17 @@ export default function QRGenerator() {
   };
 
   return (
-    <section id="generator" className="py-16 md:py-24">
+    <section id="generator" className="py-16 md:py-24" aria-label="QR Code Generator">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Free Online QR Code Generator
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Create custom QR codes for websites, WiFi networks, contact cards, and more. 
+            Download in PNG or SVG format. No registration required.
+          </p>
+        </div>
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <Card>

@@ -49,13 +49,13 @@ export default function Hero({ onGetStarted }: HeroProps) {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Generate Free QR Codes{" "}
-              <span className="text-primary">in Seconds</span>
+              Free QR Code Generator Online{" "}
+              <span className="text-primary">- Create Instantly</span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0">
-              Enter any URL, text, email, or contact info—get a scannable QR code
-              instantly. No sign-up required.
+              Generate custom QR codes for URLs, WiFi, vCards, text, email, and phone numbers. 
+              Free online QR code maker with no sign-up required. Download PNG or SVG instantly.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

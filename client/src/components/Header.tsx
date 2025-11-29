@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "./ThemeProvider";
 import { Sun, Moon, Menu, X, QrCode } from "lucide-react";
@@ -10,12 +11,19 @@ interface HeaderProps {
 export default function Header({ onNavigate }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
+  const isHomePage = location === "/";
 
-  const navItems = [
+  const homeNavItems = [
     { label: "Home", section: "home" },
     { label: "How It Works", section: "how-it-works" },
     { label: "Examples", section: "examples" },
     { label: "FAQ", section: "faq" },
+  ];
+
+  const pageNavItems = [
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ];
 
   const handleNavClick = (section: string) => {
@@ -42,7 +50,7 @@ export default function Header({ onNavigate }: HeaderProps) {
           </div>
 
           <nav className="hidden md:flex items-center gap-1" data-testid="nav-desktop">
-            {navItems.map((item) => (
+            {isHomePage && homeNavItems.map((item) => (
               <Button
                 key={item.section}
                 variant="ghost"
@@ -51,6 +59,16 @@ export default function Header({ onNavigate }: HeaderProps) {
               >
                 {item.label}
               </Button>
+            ))}
+            {pageNavItems.map((item) => (
+              <Link key={item.href} href={item.href}>
+                <Button
+                  variant="ghost"
+                  data-testid={`link-nav-${item.label.toLowerCase()}`}
+                >
+                  {item.label}
+                </Button>
+              </Link>
             ))}
           </nav>
 
@@ -89,7 +107,7 @@ export default function Header({ onNavigate }: HeaderProps) {
         {mobileMenuOpen && (
           <nav className="md:hidden py-4 border-t border-border" data-testid="nav-mobile">
             <div className="flex flex-col gap-1">
-              {navItems.map((item) => (
+              {isHomePage && homeNavItems.map((item) => (
                 <Button
                   key={item.section}
                   variant="ghost"
@@ -99,6 +117,18 @@ export default function Header({ onNavigate }: HeaderProps) {
                 >
                   {item.label}
                 </Button>
+              ))}
+              {pageNavItems.map((item) => (
+                <Link key={item.href} href={item.href}>
+                  <Button
+                    variant="ghost"
+                    className="justify-start w-full"
+                    onClick={() => setMobileMenuOpen(false)}
+                    data-testid={`link-nav-mobile-${item.label.toLowerCase()}`}
+                  >
+                    {item.label}
+                  </Button>
+                </Link>
               ))}
             </div>
           </nav>

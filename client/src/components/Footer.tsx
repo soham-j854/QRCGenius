@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -80,6 +81,24 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
+                <Link
+                  href="/about"
+                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  data-testid="link-about"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-slate-400 hover:text-white transition-colors text-sm"
+                  data-testid="link-contact"
+                >
+                  Contact Us
+                </Link>
+              </li>
+              <li>
                 <button
                   className="text-slate-400 hover:text-white transition-colors text-sm"
                   onClick={() => setPrivacyOpen(true)}
@@ -95,15 +114,6 @@ export default function Footer() {
                   data-testid="link-terms"
                 >
                   Terms of Service
-                </button>
-              </li>
-              <li>
-                <button
-                  className="text-slate-400 hover:text-white transition-colors text-sm"
-                  onClick={() => window.location.href = "mailto:hello@qrgenius.app"}
-                  data-testid="link-contact"
-                >
-                  Contact Us
                 </button>
               </li>
             </ul>
