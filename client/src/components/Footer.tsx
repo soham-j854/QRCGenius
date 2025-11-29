@@ -34,7 +34,7 @@ export default function Footer() {
                 size="icon"
                 variant="ghost"
                 className="text-slate-400 hover:text-white hover:bg-slate-800"
-                onClick={() => window.open("https://x.com", "_blank")}
+                onClick={() => window.open("https://x.com/jangirsoham08", "_blank")}
                 aria-label="Follow us on X"
                 data-testid="link-social-x"
               >
@@ -44,7 +44,7 @@ export default function Footer() {
                 size="icon"
                 variant="ghost"
                 className="text-slate-400 hover:text-white hover:bg-slate-800"
-                onClick={() => window.open("https://github.com", "_blank")}
+                onClick={() => window.open("https://github.com/jangirsoham07/techza-site", "_blank")}
                 aria-label="View on GitHub"
                 data-testid="link-social-github"
               >
