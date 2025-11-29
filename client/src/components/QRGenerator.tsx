@@ -39,7 +39,8 @@ interface QRHistoryItem {
 }
 
 interface QRSettings {
-  size: number;
+  width: number;
+  height: number;
   fgColor: string;
   bgColor: string;
   errorCorrection: "L" | "M" | "Q" | "H";
@@ -62,7 +63,8 @@ export default function QRGenerator() {
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [settings, setSettings] = useState<QRSettings>({
-    size: 500,
+    width: 500,
+    height: 500,
     fgColor: "#000000",
     bgColor: "#ffffff",
     errorCorrection: "H",
@@ -120,7 +122,7 @@ export default function QRGenerator() {
 
       const qrCanvas = document.createElement("canvas");
       await QRCode.toCanvas(qrCanvas, content, {
-        width: settings.size,
+        width: Math.max(settings.width, settings.height),
         margin: 2,
         errorCorrectionLevel: settings.errorCorrection,
         color: {
@@ -138,9 +140,10 @@ export default function QRGenerator() {
             logoImg.onload = resolve;
           });
 
-          const logoSize = settings.size * 0.2;
-          const logoX = (settings.size - logoSize) / 2;
-          const logoY = (settings.size - logoSize) / 2;
+          const maxDim = Math.max(settings.width, settings.height);
+          const logoSize = maxDim * 0.2;
+          const logoX = (maxDim - logoSize) / 2;
+          const logoY = (maxDim - logoSize) / 2;
 
           ctx.fillStyle = settings.bgColor;
           ctx.fillRect(logoX - 4, logoY - 4, logoSize + 8, logoSize + 8);
@@ -330,40 +333,64 @@ export default function QRGenerator() {
                     <AccordionContent>
                       <div className="space-y-6 pt-4">
                         <div className="space-y-3">
-                          <Label>Size: {settings.size}px</Label>
+                          <Label>Width: {settings.width}px</Label>
                           <Slider
-                            value={[settings.size]}
+                            value={[settings.width]}
                             onValueChange={(value) =>
-                              setSettings((prev) => ({ ...prev, size: value[0] }))
+                              setSettings((prev) => ({ ...prev, width: value[0] }))
                             }
                             min={100}
                             max={1000}
                             step={10}
-                            data-testid="slider-size"
+                            data-testid="slider-width"
                           />
-                          <div className="mt-4">
-                            <Label htmlFor="customSize" className="text-sm">
-                              Custom Resolution (px)
-                            </Label>
+                          <div className="mt-2">
                             <Input
-                              id="customSize"
                               type="number"
                               min="100"
                               max="1000"
-                              value={settings.size}
+                              value={settings.width}
                               onChange={(e) => {
                                 const value = parseInt(e.target.value);
                                 if (!isNaN(value) && value >= 100 && value <= 1000) {
-                                  setSettings((prev) => ({ ...prev, size: value }));
+                                  setSettings((prev) => ({ ...prev, width: value }));
                                 }
                               }}
-                              placeholder="Enter resolution (100-1000)"
-                              className="mt-1 font-mono text-sm"
-                              data-testid="input-custom-size"
+                              placeholder="Width (100-1000)"
+                              className="font-mono text-sm"
+                              data-testid="input-width"
                             />
-                            <p className="text-xs text-muted-foreground mt-1">
-                              Enter a value between 100 and 1000 pixels
-                            </p>
+                          </div>
+                        </div>
+
+                        <div className="space-y-3">
+                          <Label>Height: {settings.height}px</Label>
+                          <Slider
+                            value={[settings.height]}
+                            onValueChange={(value) =>
+                              setSettings((prev) => ({ ...prev, height: value[0] }))
+                            }
+                            min={100}
+                            max={1000}
+                            step={10}
+                            data-testid="slider-height"
+                          />
+                          <div className="mt-2">
+                            <Input
+                              type="number"
+                              min="100"
+                              max="1000"
+                              value={settings.height}
+                              onChange={(e) => {
+                                const value = parseInt(e.target.value);
+                                if (!isNaN(value) && value >= 100 && value <= 1000) {
+                                  setSettings((prev) => ({ ...prev, height: value }));
+                                }
+                              }}
+                              placeholder="Height (100-1000)"
+                              className="font-mono text-sm"
+                              data-testid="input-height"
+                            />
                           </div>
                         </div>
 
@@ -563,7 +590,7 @@ export default function QRGenerator() {
                           src={qrDataUrl}
                           alt={`QR Code for: ${content.substring(0, 50)}${content.length > 50 ? "..." : ""}`}
                           className="max-w-full"
-                          style={{ width: settings.size, height: settings.size }}
+                          style={{ width: `${settings.width}px`, height: `${settings.height}px` }}
                           data-testid="img-qr-output"
                         />
                       </div>
