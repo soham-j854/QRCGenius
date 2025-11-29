@@ -114,6 +114,16 @@ export default function QRGenerator() {
       return;
     }
 
+    // Validate dimensions
+    if (settings.width < 100 || settings.width > 1000) {
+      setValidationError(`Width must be between 100 and 1000 pixels. Current: ${settings.width}px is too ${settings.width < 100 ? "low" : "high"}.`);
+      return;
+    }
+    if (settings.height < 100 || settings.height > 1000) {
+      setValidationError(`Height must be between 100 and 1000 pixels. Current: ${settings.height}px is too ${settings.height < 100 ? "low" : "high"}.`);
+      return;
+    }
+
     setIsGenerating(true);
     setValidationError(null);
 
@@ -347,18 +357,15 @@ export default function QRGenerator() {
                           <div className="mt-2">
                             <Input
                               type="number"
-                              min="100"
-                              max="1000"
                               value={settings.width}
                               onChange={(e) => {
                                 const inputValue = e.target.value;
                                 if (inputValue === "") {
-                                  setSettings((prev) => ({ ...prev, width: 100 }));
+                                  setSettings((prev) => ({ ...prev, width: 0 }));
                                 } else {
                                   const value = parseInt(inputValue);
                                   if (!isNaN(value)) {
-                                    const clampedValue = Math.min(Math.max(value, 100), 1000);
-                                    setSettings((prev) => ({ ...prev, width: clampedValue }));
+                                    setSettings((prev) => ({ ...prev, width: value }));
                                   }
                                 }
                               }}
@@ -384,18 +391,15 @@ export default function QRGenerator() {
                           <div className="mt-2">
                             <Input
                               type="number"
-                              min="100"
-                              max="1000"
                               value={settings.height}
                               onChange={(e) => {
                                 const inputValue = e.target.value;
                                 if (inputValue === "") {
-                                  setSettings((prev) => ({ ...prev, height: 100 }));
+                                  setSettings((prev) => ({ ...prev, height: 0 }));
                                 } else {
                                   const value = parseInt(inputValue);
                                   if (!isNaN(value)) {
-                                    const clampedValue = Math.min(Math.max(value, 100), 1000);
-                                    setSettings((prev) => ({ ...prev, height: clampedValue }));
+                                    setSettings((prev) => ({ ...prev, height: value }));
                                   }
                                 }
                               }}
