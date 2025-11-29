@@ -351,9 +351,15 @@ export default function QRGenerator() {
                               max="1000"
                               value={settings.width}
                               onChange={(e) => {
-                                const value = parseInt(e.target.value);
-                                if (!isNaN(value) && value >= 100 && value <= 1000) {
-                                  setSettings((prev) => ({ ...prev, width: value }));
+                                const inputValue = e.target.value;
+                                if (inputValue === "") {
+                                  setSettings((prev) => ({ ...prev, width: 100 }));
+                                } else {
+                                  const value = parseInt(inputValue);
+                                  if (!isNaN(value)) {
+                                    const clampedValue = Math.min(Math.max(value, 100), 1000);
+                                    setSettings((prev) => ({ ...prev, width: clampedValue }));
+                                  }
                                 }
                               }}
                               placeholder="Width (100-1000)"
@@ -382,9 +388,15 @@ export default function QRGenerator() {
                               max="1000"
                               value={settings.height}
                               onChange={(e) => {
-                                const value = parseInt(e.target.value);
-                                if (!isNaN(value) && value >= 100 && value <= 1000) {
-                                  setSettings((prev) => ({ ...prev, height: value }));
+                                const inputValue = e.target.value;
+                                if (inputValue === "") {
+                                  setSettings((prev) => ({ ...prev, height: 100 }));
+                                } else {
+                                  const value = parseInt(inputValue);
+                                  if (!isNaN(value)) {
+                                    const clampedValue = Math.min(Math.max(value, 100), 1000);
+                                    setSettings((prev) => ({ ...prev, height: clampedValue }));
+                                  }
                                 }
                               }}
                               placeholder="Height (100-1000)"
