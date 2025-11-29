@@ -46,6 +46,27 @@ interface QRSettings {
   errorCorrection: "L" | "M" | "Q" | "H";
 }
 
+type QRType = "text" | "website" | "contact" | "wifi" | "email" | "phone" | "sms";
+
+interface QRFormData {
+  website_url?: string;
+  contact_name?: string;
+  contact_phone?: string;
+  contact_email?: string;
+  contact_company?: string;
+  contact_website?: string;
+  wifi_ssid?: string;
+  wifi_password?: string;
+  wifi_security?: "WPA" | "WEP" | "nopass";
+  email_address?: string;
+  email_subject?: string;
+  email_body?: string;
+  phone_number?: string;
+  sms_number?: string;
+  sms_message?: string;
+  text_content?: string;
+}
+
 const COLOR_PRESETS = [
   { name: "Classic", fg: "#000000", bg: "#ffffff" },
   { name: "Ocean", fg: "#0ea5e9", bg: "#f0f9ff" },
@@ -58,6 +79,10 @@ const MAX_CONTENT_LENGTH = 1000;
 
 export default function QRGenerator() {
   const { toast } = useToast();
+  const [qrType, setQrType] = useState<QRType>("text");
+  const [formData, setFormData] = useState<QRFormData>({
+    text_content: "",
+  });
   const [content, setContent] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
@@ -102,9 +127,45 @@ export default function QRGenerator() {
     return null;
   }, []);
 
-  const handleContentChange = (value: string) => {
-    setContent(value);
-    setValidationError(validateContent(value));
+  const buildQRContent = useCallback((type: QRType, data: QRFormData): string => {
+    switch (type) {
+      case "website":
+        return data.website_url || "";
+      case "contact":
+        return `BEGIN:VCARD
+VERSION:3.0
+FN:${data.contact_name || ""}
+TEL:${data.contact_phone || ""}
+EMAIL:${data.contact_email || ""}
+ORG:${data.contact_company || ""}
+URL:${data.contact_website || ""}
+END:VCARD`;
+      case "wifi":
+        return `WIFI:T:${data.wifi_security || "WPA"};S:${data.wifi_ssid || ""};P:${data.wifi_password || ""};;`;
+      case "email":
+        return `mailto:${data.email_address}?subject=${encodeURIComponent(data.email_subject || "")}&body=${encodeURIComponent(data.email_body || "")}`;
+      case "phone":
+        return `tel:${data.phone_number || ""}`;
+      case "sms":
+        return `smsto:${data.sms_number}:${data.sms_message || ""}`;
+      default:
+        return data.text_content || "";
+    }
+  }, []);
+
+  const handleQRTypeChange = (type: QRType) => {
+    setQrType(type);
+    setFormData({});
+    setContent("");
+    setValidationError(null);
+  };
+
+  const updateFormData = (key: string, value: string) => {
+    const updated = { ...formData, [key]: value };
+    setFormData(updated);
+    const newContent = buildQRContent(qrType, updated);
+    setContent(newContent);
+    setValidationError(validateContent(newContent));
   };
 
   const generateQRCode = async () => {
