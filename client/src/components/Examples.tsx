@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Download, Copy, Check, Wifi, User, MapPin, Link2, Mail, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -196,6 +197,9 @@ export default function Examples() {
                   </>
                 )}
               </DialogTitle>
+              <DialogDescription>
+                {selectedExample?.description}
+              </DialogDescription>
             </DialogHeader>
 
             {selectedExample && (

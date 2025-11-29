@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { QrCode, Heart, Shield, Zap, Globe } from "lucide-react";
 import { SiGithub, SiX } from "react-icons/si";
@@ -122,6 +123,9 @@ export default function Footer() {
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Privacy Policy</DialogTitle>
+            <DialogDescription>
+              How QRGenius handles your data and protects your privacy.
+            </DialogDescription>
           </DialogHeader>
           <div className="prose prose-sm dark:prose-invert">
             <p className="text-muted-foreground">Last updated: January 2025</p>
@@ -153,6 +157,9 @@ export default function Footer() {
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Terms of Service</DialogTitle>
+            <DialogDescription>
+              Terms and conditions for using QRGenius.
+            </DialogDescription>
           </DialogHeader>
           <div className="prose prose-sm dark:prose-invert">
             <p className="text-muted-foreground">Last updated: January 2025</p>
