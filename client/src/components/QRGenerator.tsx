@@ -51,6 +51,7 @@ type QRType = "text" | "website" | "contact" | "wifi" | "email" | "phone" | "sms
 interface QRFormData {
   website_url?: string;
   contact_name?: string;
+  contact_country_code?: string;
   contact_phone?: string;
   contact_email?: string;
   contact_company?: string;
@@ -66,6 +67,29 @@ interface QRFormData {
   sms_message?: string;
   text_content?: string;
 }
+
+const COUNTRY_CODES = [
+  { name: "United States", code: "+1" },
+  { name: "India", code: "+91" },
+  { name: "United Kingdom", code: "+44" },
+  { name: "Canada", code: "+1" },
+  { name: "Australia", code: "+61" },
+  { name: "Germany", code: "+49" },
+  { name: "France", code: "+33" },
+  { name: "Japan", code: "+81" },
+  { name: "China", code: "+86" },
+  { name: "Brazil", code: "+55" },
+  { name: "Mexico", code: "+52" },
+  { name: "Spain", code: "+34" },
+  { name: "Italy", code: "+39" },
+  { name: "Netherlands", code: "+31" },
+  { name: "South Korea", code: "+82" },
+  { name: "Singapore", code: "+65" },
+  { name: "UAE", code: "+971" },
+  { name: "Saudi Arabia", code: "+966" },
+  { name: "Pakistan", code: "+92" },
+  { name: "Russia", code: "+7" },
+];
 
 const COLOR_PRESETS = [
   { name: "Classic", fg: "#000000", bg: "#ffffff" },
@@ -132,10 +156,11 @@ export default function QRGenerator() {
       case "website":
         return data.website_url || "";
       case "contact":
+        const fullPhone = data.contact_country_code ? `${data.contact_country_code}${data.contact_phone || ""}` : data.contact_phone || "";
         return `BEGIN:VCARD
 VERSION:3.0
 FN:${data.contact_name || ""}
-TEL:${data.contact_phone || ""}
+TEL:${fullPhone}
 EMAIL:${data.contact_email || ""}
 ORG:${data.contact_company || ""}
 URL:${data.contact_website || ""}
@@ -428,13 +453,37 @@ END:VCARD`;
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="contact-phone">Phone</Label>
+                          <Label>Phone Number</Label>
+                          <div className="flex gap-2">
+                            <div className="flex-1">
+                              <Select value={formData.contact_country_code || "+1"} onValueChange={(value) => updateFormData("contact_country_code", value)}>
+                                <SelectTrigger data-testid="select-country-code">
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {COUNTRY_CODES.map((country) => (
+                                    <SelectItem key={`${country.name}-${country.code}`} value={country.code}>
+                                      {country.name} ({country.code})
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                            <div className="flex-1">
+                              <Input
+                                placeholder="555 000 0000"
+                                value={formData.contact_phone || ""}
+                                onChange={(e) => updateFormData("contact_phone", e.target.value)}
+                                data-testid="input-contact-phone"
+                              />
+                            </div>
+                          </div>
                           <Input
-                            id="contact-phone"
-                            placeholder="+1 (555) 000-0000"
-                            value={formData.contact_phone || ""}
-                            onChange={(e) => updateFormData("contact_phone", e.target.value)}
-                            data-testid="input-contact-phone"
+                            placeholder="Or enter custom country code (e.g., +880 for Bangladesh)"
+                            value={formData.contact_country_code || ""}
+                            onChange={(e) => updateFormData("contact_country_code", e.target.value)}
+                            className="mt-2 font-mono text-sm"
+                            data-testid="input-custom-country-code"
                           />
                         </div>
                         <div className="space-y-2">
