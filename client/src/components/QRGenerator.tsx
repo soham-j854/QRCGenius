@@ -410,6 +410,12 @@ export default function QRGenerator() {
                           </div>
                         </div>
 
+                        <div className="p-3 bg-muted/50 rounded-md border border-muted">
+                          <p className="text-sm text-muted-foreground">
+                            <span className="font-semibold text-foreground">💡 Tip:</span> Simple everyday QR codes typically use a resolution of <span className="font-mono font-semibold text-foreground">300-500px</span>. Use higher resolutions (600-1000px) for small print applications.
+                          </p>
+                        </div>
+
                         <div className="space-y-3">
                           <Label>Color Presets</Label>
                           <div className="flex flex-wrap gap-2">
