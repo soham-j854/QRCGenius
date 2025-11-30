@@ -26,11 +26,10 @@ import {
   Image as ImageIcon,
   X,
   Palette,
-  Sparkles,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import QRCode from "qrcode";
-import { QRDesignStyle, applyDesignStyle, getAvailableStyles } from "@/lib/qr-styles";
+import { QRDesignStyle, applyDesignStyle } from "@/lib/qr-styles";
 
 interface QRHistoryItem {
   id: string;
@@ -863,37 +862,6 @@ END:VCARD`;
                           </p>
                         </div>
 
-                        <div className="space-y-2">
-                          <Label htmlFor="designStyle" className="flex items-center gap-2">
-                            <Sparkles className="w-4 h-4" />
-                            Design Style
-                          </Label>
-                          <Select
-                            value={settings.designStyle}
-                            onValueChange={(value: QRDesignStyle) =>
-                              setSettings((prev) => ({
-                                ...prev,
-                                designStyle: value,
-                              }))
-                            }
-                          >
-                            <SelectTrigger id="designStyle" data-testid="select-design-style">
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {getAvailableStyles().map((style) => (
-                                <SelectItem key={style.id} value={style.id}>
-                                  <div className="flex flex-col">
-                                    <span>{style.name}</span>
-                                  </div>
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <p className="text-xs text-muted-foreground">
-                            Choose a design style to customize the appearance of your QR code modules while maintaining full scannability.
-                          </p>
-                        </div>
 
                         <div className="space-y-2">
                           <Label>Logo (Optional)</Label>
