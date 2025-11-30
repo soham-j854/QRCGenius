@@ -26,9 +26,11 @@ import {
   Image as ImageIcon,
   X,
   Palette,
+  Sparkles,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import QRCode from "qrcode";
+import { QRDesignStyle, applyDesignStyle, getAvailableStyles } from "@/lib/qr-styles";
 
 interface QRHistoryItem {
   id: string;
@@ -44,6 +46,7 @@ interface QRSettings {
   fgColor: string;
   bgColor: string;
   errorCorrection: "L" | "M" | "Q" | "H";
+  designStyle: QRDesignStyle;
 }
 
 type QRType = "text" | "website" | "contact" | "wifi" | "email" | "phone" | "sms";
@@ -117,6 +120,7 @@ export default function QRGenerator() {
     fgColor: "#000000",
     bgColor: "#ffffff",
     errorCorrection: "H",
+    designStyle: "standard",
   });
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
@@ -217,8 +221,9 @@ END:VCARD`;
       await new Promise((resolve) => setTimeout(resolve, 300));
 
       const qrCanvas = document.createElement("canvas");
+      const maxDim = Math.max(settings.width, settings.height);
       await QRCode.toCanvas(qrCanvas, content, {
-        width: Math.max(settings.width, settings.height),
+        width: maxDim,
         margin: 2,
         errorCorrectionLevel: settings.errorCorrection,
         color: {
@@ -227,8 +232,17 @@ END:VCARD`;
         },
       });
 
+      // Apply design style
+      const styledCanvas = applyDesignStyle(
+        qrCanvas,
+        maxDim / (Math.round(maxDim / 10) + 1),
+        settings.designStyle,
+        settings.fgColor,
+        settings.bgColor
+      );
+
       if (logoFile && logoPreview) {
-        const ctx = qrCanvas.getContext("2d");
+        const ctx = styledCanvas.getContext("2d");
         if (ctx) {
           const logoImg = new Image();
           logoImg.src = logoPreview;
@@ -236,7 +250,6 @@ END:VCARD`;
             logoImg.onload = resolve;
           });
 
-          const maxDim = Math.max(settings.width, settings.height);
           const logoSize = maxDim * 0.2;
           const logoX = (maxDim - logoSize) / 2;
           const logoY = (maxDim - logoSize) / 2;
@@ -248,7 +261,7 @@ END:VCARD`;
         }
       }
 
-      const dataUrl = qrCanvas.toDataURL("image/png");
+      const dataUrl = styledCanvas.toDataURL("image/png");
       setQrDataUrl(dataUrl);
 
       const newItem: QRHistoryItem = {
@@ -847,6 +860,38 @@ END:VCARD`;
                           </Select>
                           <p className="text-xs text-muted-foreground">
                             🎯 High error correction is enabled by default. Your QR codes will remain scannable even if 30% is damaged, making them perfect for printed materials.
+                          </p>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="designStyle" className="flex items-center gap-2">
+                            <Sparkles className="w-4 h-4" />
+                            Design Style
+                          </Label>
+                          <Select
+                            value={settings.designStyle}
+                            onValueChange={(value: QRDesignStyle) =>
+                              setSettings((prev) => ({
+                                ...prev,
+                                designStyle: value,
+                              }))
+                            }
+                          >
+                            <SelectTrigger id="designStyle" data-testid="select-design-style">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {getAvailableStyles().map((style) => (
+                                <SelectItem key={style.id} value={style.id}>
+                                  <div className="flex flex-col">
+                                    <span>{style.name}</span>
+                                  </div>
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <p className="text-xs text-muted-foreground">
+                            Choose a design style to customize the appearance of your QR code modules while maintaining full scannability.
                           </p>
                         </div>
 
