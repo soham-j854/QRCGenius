@@ -220,9 +220,10 @@ END:VCARD`;
       await new Promise((resolve) => setTimeout(resolve, 300));
 
       const qrCanvas = document.createElement("canvas");
-      const maxDim = Math.max(settings.width, settings.height);
+      // Use the maximum of width and height to ensure QR code is square
+      const size = Math.max(settings.width, settings.height);
       await QRCode.toCanvas(qrCanvas, content, {
-        width: maxDim,
+        width: size,
         margin: 2,
         errorCorrectionLevel: settings.errorCorrection,
         color: {
@@ -234,7 +235,7 @@ END:VCARD`;
       // Apply design style
       const styledCanvas = applyDesignStyle(
         qrCanvas,
-        maxDim / (Math.round(maxDim / 10) + 1),
+        size / (Math.round(size / 10) + 1),
         settings.designStyle,
         settings.fgColor,
         settings.bgColor
@@ -249,9 +250,9 @@ END:VCARD`;
             logoImg.onload = resolve;
           });
 
-          const logoSize = maxDim * 0.2;
-          const logoX = (maxDim - logoSize) / 2;
-          const logoY = (maxDim - logoSize) / 2;
+          const logoSize = size * 0.2;
+          const logoX = (size - logoSize) / 2;
+          const logoY = (size - logoSize) / 2;
 
           ctx.fillStyle = settings.bgColor;
           ctx.fillRect(logoX - 4, logoY - 4, logoSize + 8, logoSize + 8);

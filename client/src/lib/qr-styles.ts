@@ -106,6 +106,11 @@ export function applyDesignStyle(
   fgColor: string,
   bgColor: string
 ): HTMLCanvasElement {
+  // For standard style, return the original canvas as-is
+  if (style === "standard") {
+    return canvas;
+  }
+
   const ctx = canvas.getContext("2d");
   if (!ctx) return canvas;
 
