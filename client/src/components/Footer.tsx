@@ -30,26 +30,26 @@ export default function Footer() {
               Instant, Free QR Codes for Everyone
             </p>
             <div className="flex gap-3">
-              <Button
-                size="icon"
-                variant="ghost"
-                className="text-slate-400 hover:text-white hover:bg-slate-800"
-                onClick={() => window.open("https://x.com/jangirsoham08", "_blank")}
+              <a
+                href="https://x.com/jangirsoham08"
+                target="_blank"
+                rel="external noopener noreferrer"
                 aria-label="Follow us on X"
                 data-testid="link-social-x"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
               >
                 <SiX className="w-5 h-5" />
-              </Button>
-              <Button
-                size="icon"
-                variant="ghost"
-                className="text-slate-400 hover:text-white hover:bg-slate-800"
-                onClick={() => window.open("https://github.com/jangirsoham07/techza-site", "_blank")}
+              </a>
+              <a
+                href="https://github.com/jangirsoham07/techza-site"
+                target="_blank"
+                rel="external noopener noreferrer"
                 aria-label="View on GitHub"
                 data-testid="link-social-github"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
               >
                 <SiGithub className="w-5 h-5" />
-              </Button>
+              </a>
             </div>
           </div>
 
