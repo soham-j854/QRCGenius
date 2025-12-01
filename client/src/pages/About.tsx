@@ -22,7 +22,7 @@ export default function About() {
           <article>
             <header className="mb-12">
               <h1 className="text-4xl font-bold text-foreground mb-4" data-testid="text-about-title">
-                About QRGenius
+                About QRCGenius
               </h1>
               <p className="text-xl text-muted-foreground">
                 The free, fast, and privacy-focused QR code generator trusted by millions worldwide.
@@ -32,7 +32,7 @@ export default function About() {
             <section className="prose prose-lg dark:prose-invert max-w-none mb-12">
               <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">Our Mission</h2>
               <p className="text-muted-foreground leading-relaxed">
-                QRGenius was created with a simple mission: to provide everyone with access to 
+                QRCGenius was created with a simple mission: to provide everyone with access to 
                 high-quality QR code generation tools without any barriers. We believe that 
                 creating QR codes should be free, fast, and accessible to all, whether you're 
                 a small business owner, a marketing professional, or just someone who wants 
@@ -40,7 +40,7 @@ export default function About() {
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 Unlike other QR code generators that require sign-ups, subscriptions, or display 
-                intrusive advertisements, QRGenius is committed to remaining 100% free forever. 
+                intrusive advertisements, QRCGenius is committed to remaining 100% free forever. 
                 We don't collect your data, we don't require registration, and we don't limit 
                 how many QR codes you can create.
               </p>
@@ -121,7 +121,7 @@ export default function About() {
             <section className="prose prose-lg dark:prose-invert max-w-none mb-12">
               <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">What You Can Create</h2>
               <p className="text-muted-foreground leading-relaxed">
-                QRGenius supports a wide variety of QR code types to meet all your needs:
+                QRCGenius supports a wide variety of QR code types to meet all your needs:
               </p>
               <ul className="text-muted-foreground space-y-2">
                 <li><strong>URL QR Codes:</strong> Link directly to any website or web page</li>
@@ -135,7 +135,7 @@ export default function About() {
 
               <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">Customization Options</h2>
               <p className="text-muted-foreground leading-relaxed">
-                Every QR code you create with QRGenius can be customized to match your brand 
+                Every QR code you create with QRCGenius can be customized to match your brand 
                 or preferences. Choose from multiple color presets, adjust the size from 100px 
                 to 500px, select your preferred error correction level for better reliability, 
                 and even add your own logo to the center of the QR code.
@@ -155,7 +155,7 @@ export default function About() {
                   Ready to Create Your First QR Code?
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  Join millions of users who trust QRGenius for their QR code needs.
+                  Join millions of users who trust QRCGenius for their QR code needs.
                 </p>
                 <Link href="/#generator">
                   <Button size="lg" data-testid="button-start-creating">

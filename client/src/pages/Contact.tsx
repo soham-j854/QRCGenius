@@ -24,7 +24,7 @@ export default function Contact() {
               Get in Touch
             </h1>
             <p className="text-xl text-muted-foreground">
-              Have questions about QRGenius? We're here to help.
+              Have questions about QRCGenius? We're here to help.
             </p>
           </header>
 
@@ -32,7 +32,7 @@ export default function Contact() {
             <Card className="mb-8">
               <CardContent className="p-8">
                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  We'd love to hear from you! Whether you have questions about using QRGenius, 
+                  We'd love to hear from you! Whether you have questions about using QRCGenius, 
                   feedback about features, or need support, please don't hesitate to reach out. 
                   As a free QR code generator, we're committed to providing the best experience 
                   for our users. Your inquiries, suggestions, and feedback help us continuously 
@@ -90,7 +90,7 @@ export default function Contact() {
                   Why We're Here
                 </h3>
                 <p className="text-muted-foreground">
-                  QRGenius was created to provide everyone with access to a free, reliable, 
+                  QRCGenius was created to provide everyone with access to a free, reliable, 
                   and easy-to-use QR code generator. We believe quality tools should be 
                   accessible to all without barriers. If you have any questions, suggestions 
                   for improvements, or just want to say hello, we'd be happy to hear from you!

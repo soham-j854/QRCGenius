@@ -1,11 +1,11 @@
-# robots.txt for QRGenius
-# https://qrgenius.app
+# robots.txt for QRCGenius
+# https://qrcgenius.app
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://qrgenius.app/sitemap.xml
+Sitemap: https://qrcgenius.app/sitemap.xml
 
 # Crawl-delay (optional - be nice to servers)
 Crawl-delay: 1

@@ -1,8 +1,8 @@
-# QRGenius
+# QRCGenius
 
 ## Overview
 
-QRGenius is a free, client-side QR code generator web application built with React and Express. The application allows users to create customizable QR codes for various content types (URLs, WiFi credentials, vCards, locations, etc.) without requiring sign-up or storing any user data. All QR code generation happens in the browser using the `qrcode` library, with customization options for colors, size, error correction, and logo embedding. The application features a modern, responsive UI built with shadcn/ui components and Tailwind CSS, supporting both light and dark themes.
+QRCGenius is a free, client-side QR code generator web application built with React and Express. The application allows users to create customizable QR codes for various content types (URLs, WiFi credentials, vCards, locations, etc.) without requiring sign-up or storing any user data. All QR code generation happens in the browser using the `qrcode` library, with customization options for colors, size, error correction, and logo embedding. The application features a modern, responsive UI built with shadcn/ui components and Tailwind CSS, supporting both light and dark themes.
 
 ## User Preferences
 

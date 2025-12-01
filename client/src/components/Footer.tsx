@@ -24,7 +24,7 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center">
                 <QrCode className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-white">QRGenius</span>
+              <span className="text-xl font-bold text-white">QRCGenius</span>
             </div>
             <p className="text-sm text-slate-400 mb-4">
               Instant, Free QR Codes for Everyone
@@ -122,7 +122,7 @@ export default function Footer() {
 
         <div className="border-t border-slate-800 pt-8 text-center">
           <p className="text-sm text-slate-500 flex items-center justify-center gap-1 flex-wrap">
-            <span>2025 QRGenius. Built with</span>
+            <span>2025 QRCGenius. Built with</span>
             <Heart className="w-4 h-4 text-red-500 inline" />
             <span>for the web.</span>
           </p>
@@ -134,14 +134,14 @@ export default function Footer() {
           <DialogHeader>
             <DialogTitle>Privacy Policy</DialogTitle>
             <DialogDescription>
-              How QRGenius handles your data and protects your privacy.
+              How QRCGenius handles your data and protects your privacy.
             </DialogDescription>
           </DialogHeader>
           <div className="prose prose-sm dark:prose-invert">
             <p className="text-muted-foreground">Last updated: January 2025</p>
             <h3 className="text-foreground">Data Collection</h3>
             <p className="text-muted-foreground">
-              QRGenius does not collect, store, or process any personal data. All QR code generation happens entirely in your browser (client-side). We have no access to the content you encode.
+              QRCGenius does not collect, store, or process any personal data. All QR code generation happens entirely in your browser (client-side). We have no access to the content you encode.
             </p>
             <h3 className="text-foreground">Local Storage</h3>
             <p className="text-muted-foreground">
@@ -153,11 +153,11 @@ export default function Footer() {
             </p>
             <h3 className="text-foreground">GDPR Compliance</h3>
             <p className="text-muted-foreground">
-              Since we don't collect any personal data, QRGenius is fully compliant with GDPR and other privacy regulations.
+              Since we don't collect any personal data, QRCGenius is fully compliant with GDPR and other privacy regulations.
             </p>
             <h3 className="text-foreground">Contact</h3>
             <p className="text-muted-foreground">
-              For privacy-related questions, please contact us at hello@qrgenius.app.
+              For privacy-related questions, please contact us at hello@qrcgenius.app.
             </p>
           </div>
         </DialogContent>
@@ -168,26 +168,26 @@ export default function Footer() {
           <DialogHeader>
             <DialogTitle>Terms of Service</DialogTitle>
             <DialogDescription>
-              Terms and conditions for using QRGenius.
+              Terms and conditions for using QRCGenius.
             </DialogDescription>
           </DialogHeader>
           <div className="prose prose-sm dark:prose-invert">
             <p className="text-muted-foreground">Last updated: January 2025</p>
             <h3 className="text-foreground">Service Description</h3>
             <p className="text-muted-foreground">
-              QRGenius provides a free QR code generation service. The service is provided "as is" without warranties of any kind.
+              QRCGenius provides a free QR code generation service. The service is provided "as is" without warranties of any kind.
             </p>
             <h3 className="text-foreground">Acceptable Use</h3>
             <p className="text-muted-foreground">
-              You agree to use QRGenius only for lawful purposes. You may not use the service to create QR codes that link to illegal, harmful, or malicious content.
+              You agree to use QRCGenius only for lawful purposes. You may not use the service to create QR codes that link to illegal, harmful, or malicious content.
             </p>
             <h3 className="text-foreground">Intellectual Property</h3>
             <p className="text-muted-foreground">
-              QR codes you generate are yours to use freely. The QRGenius brand, logo, and website design remain our intellectual property.
+              QR codes you generate are yours to use freely. The QRCGenius brand, logo, and website design remain our intellectual property.
             </p>
             <h3 className="text-foreground">Limitation of Liability</h3>
             <p className="text-muted-foreground">
-              QRGenius is not liable for any damages arising from the use of our service. We make no guarantees about the scannability or functionality of generated QR codes.
+              QRCGenius is not liable for any damages arising from the use of our service. We make no guarantees about the scannability or functionality of generated QR codes.
             </p>
             <h3 className="text-foreground">Changes to Terms</h3>
             <p className="text-muted-foreground">

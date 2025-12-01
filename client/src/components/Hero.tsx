@@ -12,7 +12,7 @@ export default function Hero({ onGetStarted }: HeroProps) {
 
   useEffect(() => {
     if (canvasRef.current) {
-      QRCode.toCanvas(canvasRef.current, "https://qrgenius.app", {
+      QRCode.toCanvas(canvasRef.current, "https://qrcgenius.app", {
         width: 120,
         margin: 2,
         color: {
@@ -88,7 +88,7 @@ export default function Hero({ onGetStarted }: HeroProps) {
               <div className="relative bg-card border border-card-border rounded-2xl p-8 shadow-lg">
                 <div className="text-center mb-4">
                   <p className="text-sm text-muted-foreground">Demo QR Code</p>
-                  <p className="text-xs text-muted-foreground mt-1">Scan to visit QRGenius</p>
+                  <p className="text-xs text-muted-foreground mt-1">Scan to visit QRCGenius</p>
                 </div>
                 <canvas
                   ref={canvasRef}
@@ -97,7 +97,7 @@ export default function Hero({ onGetStarted }: HeroProps) {
                 />
                 <div className="mt-4 text-center">
                   <span className="text-xs text-muted-foreground">
-                    Powered by QRGenius
+                    Powered by QRCGenius
                   </span>
                 </div>
               </div>
