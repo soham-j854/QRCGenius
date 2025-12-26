@@ -12,10 +12,10 @@ export default {
       },
       colors: {
         // Glass Tokens
-        "glass-surface": "rgba(255, 255, 255, 0.03)",
-        "glass-border": "rgba(255, 255, 255, 0.08)",
-        "glass-highlight": "rgba(255, 255, 255, 0.1)",
-        
+        "glass-surface": "var(--glass-surface)",
+        "glass-border": "var(--glass-border)",
+        "glass-highlight": "var(--glass-highlight)",
+
         // Flat / base colors (regular buttons)
         background: "hsl(var(--background) / <alpha-value>)",
         foreground: "hsl(var(--foreground) / <alpha-value>)",
