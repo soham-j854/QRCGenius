@@ -1,3 +1,4 @@
+import { GlassCard } from "@/components/ui/GlassCard";
 import {
   Accordion,
   AccordionContent,
@@ -50,7 +51,7 @@ const faqs = [
 
 export default function FAQ() {
   return (
-    <section id="faq" className="py-16 md:py-24 bg-muted/30">
+    <section id="faq" className="py-16 md:py-24">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -63,19 +64,24 @@ export default function FAQ() {
 
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (
-            <AccordionItem
+            <GlassCard
               key={index}
-              value={`faq-${index}`}
-              className="bg-background border border-border rounded-lg mb-3 px-4"
-              data-testid={`accordion-faq-${index}`}
+              className="mb-3 px-4"
+              hoverEffect={false}
             >
-              <AccordionTrigger className="text-left hover:no-underline py-4">
-                <span className="font-medium text-foreground">{faq.question}</span>
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground pb-4">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
+              <AccordionItem
+                value={`faq-${index}`}
+                className="border-0"
+                data-testid={`accordion-faq-${index}`}
+              >
+                <AccordionTrigger className="text-left hover:no-underline py-4">
+                  <span className="font-medium text-foreground">{faq.question}</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-4">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            </GlassCard>
           ))}
         </Accordion>
       </div>

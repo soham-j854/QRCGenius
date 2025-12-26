@@ -1,4 +1,5 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
+import { GlassCard } from "@/components/ui/GlassCard";
 import { Edit3, Settings, Download, Smartphone } from "lucide-react";
 
 const steps = [
@@ -39,21 +40,21 @@ const useCases = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-16 md:py-24 bg-muted/30">
+    <section id="how-it-works" className="py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             How to Create a QR Code for Free
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Generate professional QR codes in four simple steps. Our free online QR code generator 
+            Generate professional QR codes in four simple steps. Our free online QR code generator
             requires no account, has no limits, and is completely free to use.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {steps.map((step, index) => (
-            <Card key={step.title} className="relative overflow-visible">
+            <GlassCard key={step.title} className="relative overflow-visible" hoverEffect={false}>
               <div className="absolute -top-4 left-6 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">
                 {index + 1}
               </div>
@@ -66,7 +67,7 @@ export default function HowItWorks() {
                 </h3>
                 <p className="text-sm text-muted-foreground">{step.description}</p>
               </CardContent>
-            </Card>
+            </GlassCard>
           ))}
         </div>
 
@@ -83,7 +84,7 @@ export default function HowItWorks() {
           {useCases.map((useCase) => (
             <div
               key={useCase.title}
-              className="flex items-start gap-3 p-4 rounded-lg bg-background border border-border"
+              className="flex items-start gap-3 p-4 rounded-lg bg-glass-surface border border-glass-border hover:bg-white/5 transition-colors"
               data-testid={`card-usecase-${useCase.title.toLowerCase().replace(/\s/g, "-")}`}
             >
               <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
