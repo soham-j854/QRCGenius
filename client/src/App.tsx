@@ -8,6 +8,8 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
+import { LiquidBackground } from "@/components/ui/LiquidBackground";
+
 
 function Router() {
   return (
@@ -26,7 +28,10 @@ function App() {
       <ThemeProvider>
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <div className="relative isolate min-h-screen">
+            <LiquidBackground />
+            <Router />
+          </div>
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>

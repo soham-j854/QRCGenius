@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
+import { GlassCard } from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -144,7 +145,7 @@ export default function Examples() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {examples.map((example) => (
-            <Card
+            <GlassCard
               key={example.id}
               className="hover-elevate cursor-pointer transition-all"
               onClick={() => setSelectedExample(example)}
@@ -179,7 +180,7 @@ export default function Examples() {
                   </div>
                 </div>
               </CardContent>
-            </Card>
+            </GlassCard>
           ))}
         </div>
 

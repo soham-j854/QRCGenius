@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { GlassCard } from "@/components/ui/GlassCard";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Slider } from "@/components/ui/slider";
@@ -392,13 +393,13 @@ END:VCARD`;
             Free Online QR Code Generator
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Create custom QR codes for websites, WiFi networks, contact cards, and more. 
+            Create custom QR codes for websites, WiFi networks, contact cards, and more.
             Download in PNG or SVG format. No registration required.
           </p>
         </div>
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <Card>
+            <GlassCard>
               <CardHeader>
                 <CardTitle className="text-2xl">Create Your QR Code</CardTitle>
               </CardHeader>
@@ -995,11 +996,11 @@ END:VCARD`;
                   </div>
                 )}
               </CardContent>
-            </Card>
+            </GlassCard>
           </div>
 
           <div className="lg:col-span-1">
-            <Card>
+            <GlassCard>
               <CardHeader>
                 <CardTitle className="text-lg">Recent QR Codes</CardTitle>
               </CardHeader>
@@ -1041,7 +1042,7 @@ END:VCARD`;
                               if (diffMins < 60) return `${diffMins}m ago`;
                               if (diffHours < 24) return `${diffHours}h ago`;
                               if (diffDays < 7) return `${diffDays}d ago`;
-                              
+
                               return created.toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
                             })()}
                           </p>
@@ -1062,10 +1063,10 @@ END:VCARD`;
                   </div>
                 )}
               </CardContent>
-            </Card>
+            </GlassCard>
           </div>
-        </div>
-      </div>
-    </section>
+        </div >
+      </div >
+    </section >
   );
 }
