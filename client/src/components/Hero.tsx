@@ -88,7 +88,7 @@ export default function Hero({ onGetStarted }: HeroProps) {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-primary/5 rounded-3xl blur-2xl" />
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-primary/5 rounded-3xl blur-2xl" />
-              <GlassCard className="p-8">
+              <GlassCard className="p-8" hoverEffect={false}>
                 <div className="text-center mb-4">
                   <p className="text-sm text-white/70">Demo QR Code</p>
                   <p className="text-xs text-white/50 mt-1">Scan to visit QRCGenius</p>

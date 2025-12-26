@@ -399,7 +399,7 @@ END:VCARD`;
         </div>
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <GlassCard>
+            <GlassCard hoverEffect={false}>
               <CardHeader>
                 <CardTitle className="text-2xl">Create Your QR Code</CardTitle>
               </CardHeader>
@@ -1000,7 +1000,7 @@ END:VCARD`;
           </div>
 
           <div className="lg:col-span-1">
-            <GlassCard>
+            <GlassCard hoverEffect={false}>
               <CardHeader>
                 <CardTitle className="text-lg">Recent QR Codes</CardTitle>
               </CardHeader>
