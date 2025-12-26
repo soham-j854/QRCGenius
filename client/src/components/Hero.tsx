@@ -99,7 +99,7 @@ export default function Hero({ onGetStarted }: HeroProps) {
                   data-testid="img-demo-qr"
                 />
                 <div className="mt-4 text-center">
-                  <span className="text-xs text-white/40">
+                  <span className="text-xs text-muted-foreground/60">
                     Powered by QRCGenius
                   </span>
                 </div>

@@ -30,7 +30,7 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import QRCode from "qrcode";
-import { QRDesignStyle, applyDesignStyle } from "@/lib/qr-styles";
+import { QRDesignStyle, drawQRToCanvas, generateQRSVG } from "@/lib/qr-styles";
 
 interface QRHistoryItem {
   id: string;
@@ -220,30 +220,27 @@ END:VCARD`;
     try {
       await new Promise((resolve) => setTimeout(resolve, 300));
 
+      // Generate QR Matrix Data
+      const qrData = QRCode.create(content, {
+        errorCorrectionLevel: settings.errorCorrection,
+      });
+
       const qrCanvas = document.createElement("canvas");
       // Use the maximum of width and height to ensure QR code is square
       const size = Math.max(settings.width, settings.height);
-      await QRCode.toCanvas(qrCanvas, content, {
-        width: size,
-        margin: 2,
-        errorCorrectionLevel: settings.errorCorrection,
-        color: {
-          dark: settings.fgColor,
-          light: settings.bgColor,
-        },
-      });
 
-      // Apply design style
-      const styledCanvas = applyDesignStyle(
+      // Draw base styled QR
+      drawQRToCanvas(
         qrCanvas,
-        size / (Math.round(size / 10) + 1),
+        qrData,
         settings.designStyle,
         settings.fgColor,
-        settings.bgColor
+        settings.bgColor,
+        size
       );
 
       if (logoFile && logoPreview) {
-        const ctx = styledCanvas.getContext("2d");
+        const ctx = qrCanvas.getContext("2d");
         if (ctx) {
           const logoImg = new Image();
           logoImg.src = logoPreview;
@@ -255,14 +252,19 @@ END:VCARD`;
           const logoX = (size - logoSize) / 2;
           const logoY = (size - logoSize) / 2;
 
+          // Clear area behind logo if minimal contrast needed?
+          // Actually drawQRToCanvas doesn't skip center, so proper layering:
+          // We might want to clear the center modules in the matrix, but modifying matrix is hard.
+          // Drawing a background rect behind logo seems safer.
           ctx.fillStyle = settings.bgColor;
-          ctx.fillRect(logoX - 4, logoY - 4, logoSize + 8, logoSize + 8);
+          // Draw slightly larger rect to clear modules
+          ctx.fillRect(logoX - 2, logoY - 2, logoSize + 4, logoSize + 4);
 
           ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
         }
       }
 
-      const dataUrl = styledCanvas.toDataURL("image/png");
+      const dataUrl = qrCanvas.toDataURL("image/png");
       setQrDataUrl(dataUrl);
 
       const newItem: QRHistoryItem = {
@@ -331,10 +333,43 @@ END:VCARD`;
   const downloadQR = (format: "png" | "svg") => {
     if (!qrDataUrl) return;
 
-    const link = document.createElement("a");
-    link.download = `qrcode-${Date.now()}.${format}`;
-    link.href = qrDataUrl;
-    link.click();
+    if (format === "png") {
+      const link = document.createElement("a");
+      link.download = `qrcode-${Date.now()}.png`;
+      link.href = qrDataUrl;
+      link.click();
+    } else {
+      // Regenerate SVG on demand
+      try {
+        const qrData = QRCode.create(content, {
+          errorCorrectionLevel: settings.errorCorrection,
+        });
+        const logoUrl = logoFile && logoPreview ? logoPreview : undefined;
+        const svgString = generateQRSVG(
+          qrData,
+          settings.designStyle,
+          settings.fgColor,
+          settings.bgColor,
+          Math.max(settings.width, settings.height),
+          logoUrl
+        );
+
+        const blob = new Blob([svgString], { type: "image/svg+xml" });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.download = `qrcode-${Date.now()}.svg`;
+        link.href = url;
+        link.click();
+
+        // Clean up
+        setTimeout(() => URL.revokeObjectURL(url), 100);
+      } catch (e) {
+        console.error("SVG Generation failed", e);
+        toast({ title: "SVG Export Failed", variant: "destructive" });
+        return;
+      }
+    }
 
     toast({
       title: "Downloaded!",
