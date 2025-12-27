@@ -26,7 +26,7 @@ export default function Footer() {
                 rel="external noopener noreferrer"
                 aria-label="Follow us on X"
                 data-testid="link-social-x"
-                className="inline-flex items-center justify-center w-9 h-9 rounded-md text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-md text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
               >
                 <SiX className="w-5 h-5" />
               </a>
@@ -36,7 +36,7 @@ export default function Footer() {
                 rel="external noopener noreferrer"
                 aria-label="View on GitHub"
                 data-testid="link-social-github"
-                className="inline-flex items-center justify-center w-9 h-9 rounded-md text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-md text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
               >
                 <SiGithub className="w-5 h-5" />
               </a>
