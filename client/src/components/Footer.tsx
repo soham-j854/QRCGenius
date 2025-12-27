@@ -2,6 +2,61 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { QrCode, Heart, Shield, Zap, Globe } from "lucide-react";
 import { SiGithub, SiX } from "react-icons/si";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+
+const InteractiveHeart = () => {
+  const [isFilled, setIsFilled] = useState(false);
+
+  const handleClick = () => {
+    setIsFilled(!isFilled);
+  };
+
+  return (
+    <div
+      className="relative inline-flex items-center justify-center cursor-pointer select-none"
+      onClick={handleClick}
+      role="button"
+      aria-label="Love this"
+    >
+      <motion.div
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.8 }}
+        animate={isFilled ? {
+          scale: [1, 1.4, 1],
+          transition: { duration: 0.4 }
+        } : {}}
+      >
+        <Heart
+          className={`w-4 h-4 transition-all duration-300 ${isFilled ? "text-red-500 fill-red-500" : "text-slate-500 hover:text-red-500"
+            }`}
+        />
+      </motion.div>
+
+      <AnimatePresence>
+        {isFilled && (
+          <>
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 1, scale: 0, x: 0, y: 0 }}
+                animate={{
+                  opacity: 0,
+                  scale: 0,
+                  x: Math.cos(i * 45 * (Math.PI / 180)) * 20,
+                  y: Math.sin(i * 45 * (Math.PI / 180)) * 20
+                }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="absolute w-1 h-1 bg-red-500 rounded-full"
+              />
+            ))}
+          </>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 export default function Footer() {
 
@@ -113,7 +168,7 @@ export default function Footer() {
         <div className="border-t border-slate-800 pt-8 text-center">
           <p className="text-sm text-slate-500 flex items-center justify-center gap-1 flex-wrap">
             <span>2025 QRCGenius. Built with</span>
-            <Heart className="w-4 h-4 text-red-500 inline" />
+            <InteractiveHeart />
             <span>for the web.</span>
           </p>
         </div>
