@@ -3,17 +3,27 @@
 		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 	<loc>https://qrcgenius.netlify.app/</loc>
-	<lastmod>2025-12-19T17:16:02+01:00</lastmod>
+	<lastmod>2025-01-27T00:00:00+00:00</lastmod>
 	<priority>1.0</priority>
 </url>
 <url>
 	<loc>https://qrcgenius.netlify.app/about</loc>
-	<lastmod>2025-12-19T17:16:02+01:00</lastmod>
-	<priority>1.0</priority>
+	<lastmod>2025-01-27T00:00:00+00:00</lastmod>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://qrcgenius.netlify.app/contact</loc>
-	<lastmod>2025-12-19T17:16:02+01:00</lastmod>
-	<priority>1.0</priority>
+	<lastmod>2025-01-27T00:00:00+00:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://qrcgenius.netlify.app/privacy</loc>
+	<lastmod>2025-01-27T00:00:00+00:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://qrcgenius.netlify.app/terms</loc>
+	<lastmod>2025-01-27T00:00:00+00:00</lastmod>
+	<priority>0.6</priority>
 </url>
 </urlset>
