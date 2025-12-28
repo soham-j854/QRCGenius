@@ -40,13 +40,13 @@ const useCases = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-16 md:py-24">
+    <section id="how-it-works" className="py-20 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-16 space-y-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
             How to Create a QR Code for Free
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Generate professional QR codes in four simple steps. Our free online QR code generator
             requires no account, has no limits, and is completely free to use.
           </p>
@@ -71,11 +71,11 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        <div className="text-center mb-8">
-          <h3 className="text-2xl font-bold text-foreground mb-4">
+        <div className="text-center mb-12 space-y-3 mt-20">
+          <h3 className="text-3xl font-bold text-foreground">
             Popular Use Cases
           </h3>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-lg">
             QR codes can be used for almost anything
           </p>
         </div>
