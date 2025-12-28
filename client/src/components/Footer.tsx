@@ -166,11 +166,11 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-slate-800 pt-8 text-center">
-          <p className="text-sm text-slate-500 flex items-center justify-center gap-1 flex-wrap">
+          <div className="text-sm text-slate-500 flex items-center justify-center gap-1 flex-wrap">
             <span>2025 QRCGenius. Built with</span>
             <InteractiveHeart />
             <span>for the web.</span>
-          </p>
+          </div>
         </div>
       </div>
     </footer>
