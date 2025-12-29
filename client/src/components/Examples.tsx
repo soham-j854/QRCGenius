@@ -81,6 +81,7 @@ export default function Examples() {
   const [copied, setCopied] = useState(false);
   const dialogCanvasRef = useRef<HTMLCanvasElement>(null);
   const [dialogQrUrl, setDialogQrUrl] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   useEffect(() => {
     examples.forEach(async (example) => {
@@ -131,15 +132,14 @@ export default function Examples() {
   };
 
   return (
-    <section id="examples" className="py-16 md:py-24">
+    <section id="examples" className="py-20 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-16 space-y-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
             Example QR Codes
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Explore different types of QR codes you can create. Click any example
-            to preview and download.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Explore different types of QR codes you can create. Click any example to preview and download instantly.
           </p>
         </div>
 

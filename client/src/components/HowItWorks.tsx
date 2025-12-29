@@ -84,13 +84,13 @@ export default function HowItWorks() {
           {useCases.map((useCase) => (
             <div
               key={useCase.title}
-              className="flex items-start gap-3 p-4 rounded-lg bg-glass-surface border border-glass-border hover:bg-white/5 transition-colors"
+              className="flex items-start gap-3 p-5 rounded-xl bg-gradient-to-br from-glass-surface to-glass-surface/70 border border-glass-border hover:from-white/[0.5] hover:to-white/[0.35] hover:border-white/20 transition-all duration-300 group cursor-default"
               data-testid={`card-usecase-${useCase.title.toLowerCase().replace(/\s/g, "-")}`}
             >
-              <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+              <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-primary to-emerald-400 mt-1.5 flex-shrink-0 group-hover:scale-125 transition-transform" />
               <div>
-                <h4 className="font-medium text-foreground">{useCase.title}</h4>
-                <p className="text-sm text-muted-foreground">{useCase.example}</p>
+                <h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">{useCase.title}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">{useCase.example}</p>
               </div>
             </div>
           ))}
